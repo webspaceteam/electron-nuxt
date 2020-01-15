@@ -1,0 +1,113 @@
+{
+  "name": "com.webspace.electron_nuxt",
+  "productName": "Electron Nuxt.js boilerplate",
+  "version": "1.1.2",
+  "description": "Electron application boilerplate based on Nuxt.js for crossplatform desktop application development",
+  "author": {
+    "name": "Webspace Team",
+    "email": "info@webspaceteam.com",
+    "url": "https://webspaceteam.com"
+  },
+  "private": true,
+  "main": "main.js",
+  "build": {
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "!**/.nuxt/**",
+      "!**/build/**",
+      "!**/mainprocess/**",
+      "!**/src/**",
+      "!main.mainprocess.js",
+      "!main.dev.js",
+      "!main.dev.js.map",
+      "!webpack.config.js",
+      "!.gitignore",
+      "!nuxt.config.js",
+      "!package-lock.json",
+      "!README.md"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "perMachine": true,
+      "include": "build/installer.nsh"
+    },
+    "afterSign": "build/afterSignHook.js",
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "provisioningProfile": "build/embedded.provisionprofile",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist"
+    },
+    "mas": {
+      "hardenedRuntime": false,
+      "provisioningProfile": "build/embedded.provisionprofile",
+      "entitlements": "build/entitlements.mas.plist",
+      "entitlementsInherit": "build/entitlements.mas.inherit.plist",
+      "gatekeeperAssess": false,
+      "asarUnpack": []
+    }
+  },
+  "scripts": {
+    "dev": "webpack --mode=development && electron ./main.dev.js",
+    "build:win:64": "nuxt build && webpack && electron-builder --win --x64",
+    "build:win:32": "nuxt build && webpack && electron-builder --win --x32",
+    "build:win:both": "nuxt build && webpack && electron-builder --win --x32 --x64",
+    "build:mac:dmg": "nuxt build && webpack && CSC_NAME=\"CERTIFICATE NAME (***********)\" appleId='apple@developer.id' appleIdPassword='application password' electron-builder",
+    "build:mac:store": "nuxt build && webpack && CSC_NAME=\"CERTIFICATE NAME (***********)\" electron-builder && bash build/resignAndPackage.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webspaceteam/electron-nuxt.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "electron",
+    "boilerplate",
+    "nuxt",
+    "nuxt.js",
+    "vue",
+    "vues",
+    "sass",
+    "webpack",
+    "hot",
+    "reload"
+  ],
+  "dependencies": {
+    "electron-serve": "^0.4.1"
+  },
+  "devDependencies": {
+    "@babel/runtime-corejs2": "^7.8.0",
+    "core-js": "^2.6.11",
+    "cross-env": "^6.0.3",
+    "electron": "^7.1.8",
+    "electron-builder": "^21.2.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-notarize": "^0.2.1",
+    "nuxt": "^2.11.0",
+    "sass": "^1.24.4",
+    "sass-loader": "^8.0.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
