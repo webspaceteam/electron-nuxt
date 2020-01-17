@@ -80,15 +80,15 @@ Additionaly check (add or remove) entitlements at `build/entitlements.mac.plist`
 
 > **Attention**: currently only Electron 5.0.13 and 6.1.7 can be publised to Mac App Store. Do not forget to change Electron version in package.json
 
-To publish application at Mac App Store it should be sandboxed and all binares should be signed. Appropriate entitlements needs to be added.
+To publish application at Mac App Store it should be sandboxed and all binaries should be signed. Appropriate entitlements needs to be added.
 
 Steps to prepare your application for publication:
 
 1. Change `CERTIFICATE NAME (***********)` in `package.json` file in `build:mac:store` section to yourth one.
 2. Check (add or remove) entitlements at `build/entitlements.mas.plist`. Replace `DEVELOPERID.full.package.name` in `build/entitlements.mas.plist`
 3. In `build/resignAndPackage.sh` change `APPLICATION NAME` to your application name (should be as `productName` in `package.json`). Replace `CERTIFICATE NAME (***********)` to your certificate name in two places.
-4. Binares that are listed in `build/resignAndPackage.sh` valid for Electron 5.0.13. Should be updated for another Electron version or in case additional binares will be used. To find binares run
-`find -H YourAppBundle -print0 | xargs -0 file | grep "Mach-O .*executable"` (see <a href="https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AppSandboxImplementationChecklist/AppSandboxImplementationChecklist.html#//apple_ref/doc/uid/TP40011183-CH8-SW1" target="_blank">source</a>). Binares from `node_modules` can be unpacked by listing them in `asarUnpack` key in `package.json`.
+4. Binaries that are listed in `build/resignAndPackage.sh` valid for Electron 5.0.13. Should be updated for another Electron version or in case additional binaries will be used. To find binaries run
+`find -H YourAppBundle -print0 | xargs -0 file | grep "Mach-O .*executable"` (see <a href="https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AppSandboxImplementationChecklist/AppSandboxImplementationChecklist.html#//apple_ref/doc/uid/TP40011183-CH8-SW1" target="_blank">source</a>). Binaries from `node_modules` can be unpacked by listing them in `asarUnpack` key in `package.json`.
 5. Build `dist/mas/$APP-mac_store.pkg` should be uploaded to Mac App Store via <a href="https://apps.apple.com/us/app/transporter/id1450874784?mt=12" target="_blank">Transporter</a> application
 
 

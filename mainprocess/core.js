@@ -23,7 +23,7 @@ const makeAppWindow = () => {
         minWidth: 375,
         minHeight: 780,
         autoHideMenuBar: true,
-        icon: path.join(__dirname, "icon/icon.png")
+        icon: path.join(__dirname, "build/icon.png")
     });
 
     win.on("closed", () => (win = null));
